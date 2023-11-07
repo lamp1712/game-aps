@@ -1,0 +1,130 @@
+#include <stdio.h>
+#include <stdlib.h>
+ 
+void tabuleiro (char list[3][3]);
+char reset (char reset[3][3]);
+int v_reset (int vetor[9]);
+
+int main (){
+    
+	char continuar = 's',lista[3][3],vez,novo;
+    int i,j,jogada,v[9];
+    
+while(continuar == 's'){
+    	i = 0;
+    	j = 0;
+    	jogada = 10;
+		reset(lista);
+		v_reset(v);
+	while (i == 0){
+    	for (i = 0; i < 9; i++){
+        	system ("cls");
+        	tabuleiro(lista);
+        	if (lista[0][0] == lista[0][1] && lista[0][1] == lista[0][2] ||
+            	lista[1][0] == lista[1][1] && lista[1][1] == lista[1][2] ||
+            	lista[2][0] == lista[2][1] && lista[2][1] == lista[2][2] ||
+            	lista[0][0] == lista[1][0] && lista[1][0] == lista[2][0] ||
+            	lista[0][1] == lista[1][1] && lista[1][1] == lista[2][1] ||
+            	lista[0][2] == lista[1][2] && lista[1][2] == lista[2][2] ||
+            	lista[0][0] == lista[1][1] && lista[1][1] == lista[2][2] ||
+            	lista[0][2] == lista[1][1] && lista[1][1] == lista[2][0])
+        	{
+        	    printf("o %c vanceu\n",vez);
+        	    break;
+        	}
+        	else{
+        		
+        	    if (i %2 == 0){
+        	        printf("onde deseja colocar o X?: \n");
+        	        scanf("%d",&jogada);
+            	    vez = 'X';
+            	    v[i] = jogada;
+            	}
+            	else{
+            	    printf("onde deseja colocar o O?: \n");
+            	    scanf("%d",&jogada);
+            	    vez = 'O';
+            	    v[i] = jogada;
+            	}
+				
+            	for (j = 0; j < 9; j++){
+            	    if (v[j] == jogada){
+            	        printf("jogada invalida");
+            	        break;
+            	    }
+            	    else{
+            	        switch (jogada){
+            	            case 1:
+            	                lista[0][0] = vez;
+            	                break;
+                	        case 2:
+                	            lista[0][1] = vez;
+                	            break;
+                	        case 3:
+                	            lista[0][2] = vez;
+                	            break;
+                	        case 4:
+                	            lista[1][0] = vez;
+                	            break;
+                	        case 5:
+                	            lista[1][1] = vez;
+                	            break;
+                	        case 6:
+                	            lista[1][2] = vez;
+                	            break;
+                	        case 7:
+                	            lista[2][0] = vez;
+                	            break;
+                	        case 8:
+                	            lista[2][1] = vez;
+                	            break;
+                	        case 9:
+                	            lista[2][2] = vez;
+                	            break;
+                	        default:
+                	            printf("opcao invalida");
+                	            i--;
+                	            break;
+                	        }
+                	    }
+                	}
+            	}
+        	}
+        	printf("deseja continuar?[s/n]: ");
+        	scanf("%s",&continuar);
+        	i = 10;
+        }
+	}
+return 0;
+ }
+
+ //desenha o tabuleiro
+ void tabuleiro (char list[3][3]){
+    printf ("--------------\n");
+    printf ("| %c | %c | %c |\n",list[0][0],list[0][1],list[0][2]);
+    printf ("--------------\n");
+    printf ("| %c | %c | %c |\n",list[1][0],list[1][1],list[1][2]);
+    printf ("--------------\n");
+    printf ("| %c | %c | %c |\n",list[2][0],list[2][1],list[2][2]);
+    printf ("--------------\n");
+    return;
+    }
+char reset (char reset[3][3]){
+		reset[0][0] = '1';
+	    reset[0][1] = '2';
+    	reset[0][2] = '3';
+    	reset[1][0] = '4';
+    	reset[1][1] = '5';
+    	reset[1][2] = '6';
+    	reset[2][0] = '7';
+    	reset[2][1] = '8';
+    	reset[2][2] = '9';
+	return reset[3][3];
+}
+
+int v_reset (int vetor[9]){
+	for(int i = 0; i < 9; i++){
+		vetor[i] = 100;
+	}
+	return vetor[9];
+}
